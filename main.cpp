@@ -14,6 +14,8 @@ const float scale = 30.25f;
 int main()
 {
     float angle{};
+    Mat4 matX {};
+    Mat4 matY {};
     Mat4 mat {};
     Vec3 Vertex1, Vertex2, Vertex3;
     Vertex1.vec3[0] = 0.0f;    Vertex1.vec3[1] = -1.0f; Vertex1.vec3[2] = 0.0f;  
@@ -23,7 +25,9 @@ int main()
     while (true)
     {
         angle += 0.04f;
-        Math::Mat4x4RotY(mat, angle);
+        Math::Mat4x4RotX(matX, 1.4);
+        Math::Mat4x4RotY(matY, angle);
+        mat = matY * matX;
         Vec3 screenV1 = Math::TransformProject(Vertex1, mat, scale, CENTERX, CENTERY);
         Vec3 screenV2 = Math::TransformProject(Vertex2, mat, scale, CENTERX, CENTERY);
         Vec3 screenV3 = Math::TransformProject(Vertex3, mat, scale, CENTERX, CENTERY);
