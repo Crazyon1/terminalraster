@@ -8,8 +8,6 @@
 but through working on it I realized that I can use a framebuffer to make a renderer using some ascii
 so this is me just testing that idea for funzies
 */
-const uint32 boxwidth = 10;
-const uint32 boxheight = 5;
 const float scale = 30.25f;
 int main()
 {
