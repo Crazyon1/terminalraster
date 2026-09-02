@@ -27,7 +27,6 @@ int main()
         Vec3 screenV1 = Math::TransformProject(Vertex1, mat, scale, CENTERX, CENTERY);
         Vec3 screenV2 = Math::TransformProject(Vertex2, mat, scale, CENTERX, CENTERY);
         Vec3 screenV3 = Math::TransformProject(Vertex3, mat, scale, CENTERX, CENTERY);
-        Vec3 screenV4 = Math::TransformProject(Vertex4, mat, scale, CENTERX, CENTERY);
         if (screenV1.vec3[2] < 0 || screenV2.vec3[2] < 0 || screenV3.vec3[2] < 0) continue;
         Rasterizer::DrawTriangle(screenV1, screenV2, screenV3);
         Rasterizer::swapbuffers();
