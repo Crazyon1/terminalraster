@@ -88,7 +88,8 @@ namespace Rasterizer
         if (vertex1.vec3[1] != vertex2.vec3[1])
         {
             segmentHeight = vertex2.vec3[1] - vertex1.vec3[1];
-            for(int y = vertex1.vec3[1]; y<=vertex2.vec3[1]; ++y)
+            int step = (segmentHeight > 0) ? 1 : -1;
+            for(int y = vertex1.vec3[1]; y<vertex2.vec3[1]; ++y)
             {
                 point1.vec3[0] = vertex1.vec3[0] + ((vertex3.vec3[0] - vertex1.vec3[0]) * (y - vertex1.vec3[1])) / totalHeight;
                 point2.vec3[0] = vertex1.vec3[0] + ((vertex2.vec3[0] - vertex1.vec3[0]) * (y - vertex1.vec3[1])) / segmentHeight;
@@ -102,13 +103,10 @@ namespace Rasterizer
         if (vertex2.vec3[1] != vertex3.vec3[1])
         {
             segmentHeight = vertex3.vec3[1] - vertex2.vec3[1];
-            for(int y = vertex2.vec3[1]; y<=(int)vertex3.vec3[1]; ++y)
+            for(int y = vertex2.vec3[1]; y<(int)vertex3.vec3[1]; ++y)
             {
                 int x1 = vertex1.vec3[0] + ((vertex3.vec3[0] - vertex1.vec3[0]) * (y - vertex1.vec3[1])) / totalHeight;
-                float s = ((float)y + 0.5f - vertex2.vec3[1]) / segmentHeight;
-                if (s < 0) s = 0; else if (s > 1) s = 1;
-                int x2 = (int)(vertex2.vec3[0] + (vertex3.vec3[0] - vertex2.vec3[0]) * s);
-                //int x2 = vertex2.vec3[0] + ((vertex3.vec3[0] - vertex2.vec3[0]) * (y - vertex2.vec3[1])) / segmentHeight;
+                int x2 = vertex2.vec3[0] + ((vertex3.vec3[0] - vertex2.vec3[0]) * (y - vertex2.vec3[1])) / segmentHeight;
                 point1.vec3[0] = x1;
                 point2.vec3[0] = x2;
                 point1.vec3[1] = y;
