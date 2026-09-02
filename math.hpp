@@ -20,6 +20,23 @@ struct Vec3
 struct Mat4
 {
     int32 mat4[4][4] {};
+    Mat4 operator*(const Mat4& other)
+    {
+        Mat4 tmp;
+        for (int i = 0; i < 4; ++i)
+        {
+            for (int j = 0; j < 4; ++j)
+            {
+                long long sum = 0;
+                for (int k = 0; k < 4; ++k)
+                {
+                    sum += (long long)mat4[i][k] * other.mat4[k][j];
+                }
+                tmp.mat4[i][j] = (int32)(sum / 4096);
+            }
+        }
+        return tmp;
+    }
 };
 namespace Math
 {
@@ -67,6 +84,16 @@ namespace Math
         mat.mat4[0][0] = (int32)(Cos * ONE);
         mat.mat4[0][2] = (int32)(Sin * ONE);
         mat.mat4[2][0] = (int32)(-Sin * ONE);
+        mat.mat4[2][2] = (int32)(Cos * ONE);
+    }
+    inline void Mat4x4RotX(Mat4 &mat, float angle)
+    {
+        Mat4x4IdentEqu(mat);
+        float Cos = cosf(angle);
+        float Sin = sinf(angle);
+        mat.mat4[1][1] = (int32)(Cos * ONE);
+        mat.mat4[1][2] = (int32)(-Sin* ONE);
+        mat.mat4[2][1] = (int32)(Sin * ONE);
         mat.mat4[2][2] = (int32)(Cos * ONE);
     }
 }
