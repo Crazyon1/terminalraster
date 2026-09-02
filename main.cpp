@@ -10,16 +10,15 @@ so this is me just testing that idea for funzies
 */
 const uint32 boxwidth = 10;
 const uint32 boxheight = 5;
-const float scale = 0.25f;
+const float scale = 30.25f;
 int main()
 {
     float angle{};
     Mat4 mat {};
     Vec3 Vertex1, Vertex2, Vertex3;
-    Vertex1.vec3[0] = 0.0f;    Vertex1.vec3[1] = -100.0f; Vertex1.vec3[2] = 0.0f;  
-    Vertex2.vec3[0] = 100.0f;  Vertex2.vec3[1] = 100.0f;  Vertex2.vec3[2] = 0.0f;  
-    Vertex3.vec3[0] = -100.0f; Vertex3.vec3[1] = 100.0f;  Vertex3.vec3[2] = 0.0f;
-    
+    Vertex1.vec3[0] = 0.0f;    Vertex1.vec3[1] = -1.0f; Vertex1.vec3[2] = 0.0f;  
+    Vertex2.vec3[0] = 2.0f;  Vertex2.vec3[1] = 1.0f;  Vertex2.vec3[2] = 0.0f;  
+    Vertex3.vec3[0] = -2.0f; Vertex3.vec3[1] = 1.0f;  Vertex3.vec3[2] = 0.0f;
     Clearbuffers();
     while (true)
     {
@@ -28,6 +27,7 @@ int main()
         Vec3 screenV1 = Math::TransformProject(Vertex1, mat, scale, CENTERX, CENTERY);
         Vec3 screenV2 = Math::TransformProject(Vertex2, mat, scale, CENTERX, CENTERY);
         Vec3 screenV3 = Math::TransformProject(Vertex3, mat, scale, CENTERX, CENTERY);
+        Vec3 screenV4 = Math::TransformProject(Vertex4, mat, scale, CENTERX, CENTERY);
         if (screenV1.vec3[2] < 0 || screenV2.vec3[2] < 0 || screenV3.vec3[2] < 0) continue;
         Rasterizer::DrawTriangle(screenV1, screenV2, screenV3);
         Rasterizer::swapbuffers();
