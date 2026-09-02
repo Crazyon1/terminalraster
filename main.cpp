@@ -5,7 +5,7 @@
 #include <iostream>
 #include <thread>
 /*I've been working on a seperate project that uses a framebuffer 
-but through working on it I realized that I use a framebuffer to make a renderer using some ascii
+but through working on it I realized that I can use a framebuffer to make a renderer using some ascii
 so this is me just testing that idea for funzies
 */
 const uint32 boxwidth = 10;
