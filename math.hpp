@@ -10,12 +10,12 @@ struct Vec3
     Vec3 operator-(const Vec3& other)
     {
         Vec3 Result;
-        Result.vec3[0] = vec3[0] - other.vec3[0];
-        Result.vec3[1] = vec3[1] - other.vec3[1];
-        Result.vec3[2] = vec3[2] - other.vec3[2];
+        Result.x = x - other.x;
+        Result.y = y - other.y;
+        Result.z = z - other.z;
         return Result;
     }
-    float vec3[3];
+    float x, y,z;
 };
 struct Mat4
 {
@@ -48,23 +48,23 @@ namespace Math
     }
     inline Vec3 TransformProject(Vec3& localPos, Mat4 mat, float scale, uint32 centerX, uint32 centerY)
     {
-        float rx = (mat.mat4[0][0]*localPos.vec3[0] + mat.mat4[0][1]*localPos.vec3[1] + mat.mat4[0][2]*localPos.vec3[2]) / ONE;
-        float ry = (mat.mat4[1][0]*localPos.vec3[0] + mat.mat4[1][1]*localPos.vec3[1] + mat.mat4[1][2]*localPos.vec3[2]) / ONE;
-        float rz = (mat.mat4[2][0]*localPos.vec3[0] + mat.mat4[2][1]*localPos.vec3[1] + mat.mat4[2][2]*localPos.vec3[2]) / ONE;
+        float rx = (mat.mat4[0][0]*localPos.x + mat.mat4[0][1]*localPos.y + mat.mat4[0][2]*localPos.z) / ONE;
+        float ry = (mat.mat4[1][0]*localPos.x + mat.mat4[1][1]*localPos.y + mat.mat4[1][2]*localPos.z) / ONE;
+        float rz = (mat.mat4[2][0]*localPos.x + mat.mat4[2][1]*localPos.y + mat.mat4[2][2]*localPos.z) / ONE;
 
         float zOffset = rz + 400.0f;
         Vec3 screenPos;
         if (zOffset <= 1.0f)
         {
-            screenPos.vec3[0] = -99999.0f;
-            screenPos.vec3[1] = -99999.0f;
-            screenPos.vec3[2] = -1.0f;
+            screenPos.x = -99999.0f;
+            screenPos.y = -99999.0f;
+            screenPos.z = -1.0f;
             return screenPos;
         }
         float distanceScaling = 300.0f;
-        screenPos.vec3[0] = centerX + (rx * scale * distanceScaling) / zOffset;
-        screenPos.vec3[1] = centerY + (ry * scale * distanceScaling) / zOffset;
-        screenPos.vec3[2] = zOffset;
+        screenPos.x = centerX + (rx * scale * distanceScaling) / zOffset;
+        screenPos.y = centerY + (ry * scale * distanceScaling) / zOffset;
+        screenPos.z = zOffset;
 
         return screenPos;
     }

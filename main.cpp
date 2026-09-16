@@ -12,13 +12,11 @@ const float scale = 30.25f;
 int main()
 {
     float angle{};
-    Mat4 matX {};
-    Mat4 matY {};
-    Mat4 mat {};
+    Mat4 matX, matY, mat;
     Vec3 Vertex1, Vertex2, Vertex3;
-    Vertex1.vec3[0] = 0.0f;    Vertex1.vec3[1] = -1.0f; Vertex1.vec3[2] = 0.0f;  
-    Vertex2.vec3[0] = 2.0f;  Vertex2.vec3[1] = 1.0f;  Vertex2.vec3[2] = 0.0f;  
-    Vertex3.vec3[0] = -2.0f; Vertex3.vec3[1] = 1.0f;  Vertex3.vec3[2] = 0.0f;
+    Vertex1.x = 0.0f;    Vertex1.y = -1.0f; Vertex1.z = 0.0f;  
+    Vertex2.x = 2.0f;  Vertex2.y = 1.0f;  Vertex2.z = 0.0f;  
+    Vertex3.x= -2.0f; Vertex3.y = 1.0f;  Vertex3.z = 0.0f;
     Clearbuffers();
     while (true)
     {
@@ -29,7 +27,7 @@ int main()
         Vec3 screenV1 = Math::TransformProject(Vertex1, mat, scale, CENTERX, CENTERY);
         Vec3 screenV2 = Math::TransformProject(Vertex2, mat, scale, CENTERX, CENTERY);
         Vec3 screenV3 = Math::TransformProject(Vertex3, mat, scale, CENTERX, CENTERY);
-        if (screenV1.vec3[2] < 0 || screenV2.vec3[2] < 0 || screenV3.vec3[2] < 0) continue;
+        if (screenV1.z < 0 || screenV2.z < 0 || screenV3.z < 0) continue;
         Rasterizer::DrawTriangle(screenV1, screenV2, screenV3);
         Rasterizer::swapbuffers();
         std::this_thread::sleep_for(std::chrono::microseconds(20000));
